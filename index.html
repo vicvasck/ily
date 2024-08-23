@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Meu Amor</title>
+    <style>
+        body {
+            background-color: #FADCD9;
+            font-family: 'Times New Roman', serif;
+            color: #C62828;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #C62828;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #F28C8C;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+        }
+
+        .contador {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .bolha {
+            background-color: #FADCD9;
+            border: 1px solid #FF9AA2;
+            border-radius: 15px;
+            padding: 6px;
+            display: inline-block;
+            position: relative;
+            font-size: 13px;
+            min-width: 80px;
+            text-align: center;
+            margin: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        .bolha.dias {
+            background-color: #FF9AA2;
+        }
+
+        .bolha.horas {
+            background-color: #FF9AA2;
+        }
+
+        .bolha.minutos {
+            background-color: #FF9AA2;
+        }
+
+        .bolha.segundos {
+            background-color: #FF9AA2;
+        }
+
+        .bolha.segundos::after {
+            content: "♡";
+            position: absolute;
+            top: -15px;
+            right: -5px;
+            font-size: 22px;
+            color: #FF66B2;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            60% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .fotos {
+            margin-top: 30px;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 15px;
+            border: 2px solid #F28C8C;
+        }
+
+        .botoes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .botao {
+            display: inline-block;
+            background-color: #F28C8C;
+            color: #FADCD9;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .botao:active {
+            background-color: #F16B6B;
+            transform: scale(0.95);
+        }
+
+        .botao-musica {
+            background-color: #FF9AA2;
+        }
+
+        .botao-musica:active {
+            background-color: #FF6F6F;
+        }
+
+        .botao-mapa {
+            background-color: #FF9AA2;
+        }
+
+        .botao-mapa:active {
+            background-color: #FF9AA2;
+        }
+
+        .mensagem {
+            display: none;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid #F28C8C;
+            background-color: #FFEBEE;
+            color: #C62828;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eu te amo.🤍</h1>
+    <p>Estamos juntos há:</p>
+    <div class="contador">
+        <div class="bolha dias" id="dias"></div>
+        <div class="bolha horas" id="horas"></div>
+        <div class="bolha minutos" id="minutos"></div>
+        <div class="bolha segundos" id="segundos"></div>
+    </div>
+    
+    <br>
+    <br>
+    <p>*SEU TEXTO AQUI*</p>
+    <br>
+    <br>
+    <img src="foto.jpg" alt="foto 1">
+
+    <div class="botoes-container">
+        <button class="botao botao-mapa" onclick="mostrarMensagem('Escolha um local')">Local onde você disse o primeiro "eu te amo"</button>
+        <button class="botao botao-mapa 2" onclick="mostrarArroz('Escolha um local')">Local onde nos beijamos pela primeira vez</button>
+        <button class="botao botao-musica" onclick="mostrarMensagem('Escolha uma música')">Clique aqui e sinta o que eu sinto por você!🤍</button>
+    </div>
+
+    <div id="mensagem" class="mensagem"></div>
+    
+    <div id="arroz" class="mensagem"></div></div>
+
+    <script>
+        var dataInicio = new Date("2023-10-22T00:02:10");
+
+        function atualizarContador() {
+            var agora = new Date();
+            var tempoJuntos = agora - dataInicio;
+            
+            var dias = Math.floor(tempoJuntos / (1000 * 60 * 60 * 24));
+            var horas = Math.floor((tempoJuntos % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutos = Math.floor((tempoJuntos % (1000 * 60 * 60)) / (1000 * 60));
+            var segundos = Math.floor((tempoJuntos % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerHTML = dias + " dias";
+            document.getElementById("horas").innerHTML = horas + " horas";
+            document.getElementById("minutos").innerHTML = minutos + " minutos";
+            document.getElementById("segundos").innerHTML = segundos + " segundos";
+        }
+
+        setInterval(atualizarContador, 1000);
+
+        function mostrarMensagem(mensagemTexto) {
+            var mensagem = document.getElementById('mensagem');
+            mensagem.innerHTML = mensagemTexto;
+            mensagem.style.display = 'block';
+            setTimeout(function() {
+                mensagem.style.display = 'none';
+            }, 3000); // A mensagem desaparecerá após 3 segundos
+            
+            
+            
+        }
+    </script>
+</body>
+</html>
